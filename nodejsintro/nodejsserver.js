@@ -1,8 +1,37 @@
 const http=require('http');
 
 const server=http.createServer((req,res)=>{
-    console.log("Siddharth Saxena");
+    // console.log(req.url,req.method);
+    // console.log(res.)
+    const url=req.url;
+
+    if(url==='/home'){
+        console.log('Welcome home')
+    }
+    else if(url==='/about'){
+        console.log('Welcome to About Us page')
+    }
+    else if(url==='/node'){
+        console.log('Welcome to my Node Js project')
+    }
+
+    // if(url==='/'){
+    //     res.write('<html>')
+    //     res.write('<head>Title</head>');
+    //     res.write('<body><form action="/message" method="post"><input type="text" ><button type="submit">Send</button></form></body>');
+    //     res.write('</html>');
+    //     return res.end();
+    // }
+
+    res.setHeader("Content-Type",'text/html');
+    res.write('<html>');
+    res.write('<head><title>My title!</title></head>');
+    res.write('<body><h2>Welcome to my node.js project.</h2></body>');
+    res.write('</html>');
+    res.end();
+
 })
+
 
 server.listen(4000);
 
