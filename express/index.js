@@ -1,3 +1,57 @@
+// Intro to Middlewares
+
+// body parser
+// body parser is used to parse the data in the requests
+// .If it is not present , the system will return undefined
+// as it wont be able to read it.
+
+// 
+
+const http=require('http');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app=express();
+
+app.use(bodyParser.urlencoded({extended:false}));
+
+app.use('/add-product',(req,res,next)=>{
+    // console.log('add-product');
+    res.send('<form action="/product" method="POST"><input type="text" name="content"><button type="submit">Add content</button> </form>')
+})
+
+app.use('/product',(req,res,next)=>{
+    console.log(req.body);
+    res.send('<h1>submitted</h1>')
+})
+
+app.listen(3030)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Module 1
 
 // Express
@@ -88,25 +142,40 @@
 // application to handle incoming HTTP requests.
 
 
-const http = require('http');
+// const http = require('http');
 
-const express = require('express');
+// const express = require('express');
 
-const app=express();
+// const app=express();
 
-app.use((req,res,next)=>{
-    console.log('In the middleware!');
-    next();
-});
+// app.use('/',(req,res,next)=>{
+//     console.log('This always runs');
+//     next();
+// });
 
-app.use((req,res,next)=>{
-    console.log('In another middleware');
-})
+// app.use('/home',(req,res,next)=>{
+//     console.log('Home page!');
+//     res.send(`<h1>home page</h1>`);
+//     // next();
+// });
 
-const server =http.createServer(app);
 
-server.listen(3000);
+// app.use('/',(req,res,next)=>{
+//     console.log('In the middleware!');
+//     res.send(`<h1>normal</h1>`)
+//     // next();
+// });
 
+
+
+// // app.use((req,res,next)=>{
+// //     console.log('In another middleware');
+// // })
+
+// const server =http.createServer(app);
+
+// server.listen(3000);
+// // app.listen(3000)
 
 
 
