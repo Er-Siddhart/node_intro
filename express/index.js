@@ -13,16 +13,29 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const adminRoutes=require('./routes/admin.js')
 const shopRoutes=require('./routes/shop.js')
+const path=require('path');
 
 const app=express();
+const rootDir=require('./util/path');//here we dont have to go
+// to the previous directory as we are already in the main directory
+// so we are not going to type ..(double dot) before the slash and only one 
+// dot.
 
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.use(adminRoutes);
-app.use('/shop',shopRoutes);
+app.use(shopRoutes);
+// app.use(adminRoutes);
+
+
+// app.use((req,res,next)=>{
+//     res.status(404).send('<h1>Page not found</h1>')
+// })
+
+app.use(express.static(path.join(__dirname,'public')));
+// the above snippet helps us to serve file statically.
 
 app.use((req,res,next)=>{
-    res.status(404).send('<h1>Page not found</h1>')
+    res.status(404).sendFile(path.join(rootDir,'views','404.html'))
 })
 
 app.listen(3030)
