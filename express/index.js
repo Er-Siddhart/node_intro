@@ -5,17 +5,19 @@
 // .If it is not present , the system will return undefined
 // as it wont be able to read it.
 
-// 
 
 const http=require('http');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const app=express();
+
 const adminRoutes=require('./routes/admin.js')
 const shopRoutes=require('./routes/shop.js')
 const path=require('path');
 
-const app=express();
+
 const rootDir=require('./util/path');//here we dont have to go
 // to the previous directory as we are already in the main directory
 // so we are not going to type ..(double dot) before the slash and only one 
@@ -23,8 +25,8 @@ const rootDir=require('./util/path');//here we dont have to go
 
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.use(shopRoutes);
-// app.use(adminRoutes);
+// app.use(shopRoutes);
+app.use(adminRoutes);
 
 
 // app.use((req,res,next)=>{
@@ -35,7 +37,7 @@ app.use(express.static(path.join(__dirname,'public')));
 // the above snippet helps us to serve file statically.
 
 app.use((req,res,next)=>{
-    res.status(404).sendFile(path.join(rootDir,'views','404.html'))
+    res.status(404).sendFile(path.join(rootDir,'views','404.html'));
 })
 
 app.listen(3030)

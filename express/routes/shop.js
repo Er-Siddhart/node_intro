@@ -1,14 +1,14 @@
-const express=require('express');
+// const express=require('express');
 
-const path=require('path');
+// const path=require('path');
 
-const routerTwo=express.Router();
-const rootDir=require('../util/path');
+// const routerTwo=express.Router();
+// const rootDir=require('../util/path');
 
 
-routerTwo.get('/',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','shop.html'))
-})
+// routerTwo.get('/',(req,res,next)=>{
+//     res.sendFile(path.join(rootDir,'views','shop.html'))
+// })
 
 
 // routerTwo.use('/add-product',(req,res,next)=>{
@@ -21,4 +21,17 @@ routerTwo.get('/',(req,res,next)=>{
 //     res.send('<h1>submitted</h1>')
 // })
 
-module.exports=routerTwo;
+// module.exports=routerTwo;
+
+// const adminData = require('./admin');
+const path = require('path');
+
+const express = require('express');
+
+const productsController = require('../controllers/products');
+
+const router = express.Router();
+
+router.get('/', productsController.getProducts);
+
+module.exports = router;
